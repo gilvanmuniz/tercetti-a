@@ -1,16 +1,11 @@
 <template>
   <div class="cadastro">
-    <div class="calendar">
+    <div class="calendar ml-3 ">
       <Calendar />
     </div>
-    <div class="formulario-auto">
+    <div class="cadastro-autos ml-3">
       <CadastroAutos />
-    </div>
-    <div class="listcar">
-      <ul>
-        <li v-for="(car, i) in listcar " :key="i">{{ car }}</li>
-      </ul>
-    </div>
+    </div>   
      <Menus class="menus" />
   </div>
 </template>
@@ -27,7 +22,7 @@ export default {
   },
   data() {
     return {
-      listcar: ['Compass 2.0', 'Jeep Renegate Turbo', 'Corrola luxo', 'Fiesta 1.8', 'Porshe', 'Mercedez M-3']
+     
     }
   }
 }
@@ -37,23 +32,27 @@ export default {
 .cadastro{
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content:space-between;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 2%;
+  
   .calendar{
     width: 21%;
+    max-height: 20%;
+    margin-left: 7%;
+  }
+  .cadastro-autos{
+    width: 100%;
+    margin-left: -1%;
+    margin-top: -4%;   
   }
   .menus{
-    width: 7%;
+    width: 9%;
     margin-right: 2.5%;
+    margin-top: -4%; 
   }
-  .listcar{
-    ul{
-      list-style: none;
-      li{
-        color: white;
-        font-size: 20px;
-      }
-    }
-  }
+ 
 }
 
 </style>

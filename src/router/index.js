@@ -14,9 +14,17 @@ Vue.use(VueRouter)
     path: '/cadastro',
     name: 'Cadastro',
     // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
+    // this generates a separate chunk (cadastro.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Cadastro.vue')
+    component: () => import(/* webpackChunkName: "cadastro" */ '../views/Cadastro.vue')
+  },
+  {
+    path: '/clientes',
+    name: 'Clientes',
+    // route level code-splitting
+    // this generates a separate chunk (clientes.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "clientes" */ '../views/Clientes.vue')
   }
 ]
 

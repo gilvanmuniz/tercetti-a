@@ -104,27 +104,39 @@ export default {
 
 <style lang="scss" scoped>
 .calendario{
+    width: 80%;
+    min-width:260px;        
     .calendar{
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content:space-between;
+        align-items: center;
         color: grey;
         background-color: rgb(245, 239, 228);
         padding: 7%;
         border-radius:7%;
+        max-height:260px;
+        height:260px;
         .diahora{
             display: flex;
             justify-content:center;
             padding: 2%;
+            margin-bottom: 4%;
         } /* diahora end */
         .todayday{
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;            
+            align-items: center;
+            margin-top: -14%;
+             h1{
+                font-size: 7.5em;
+                font-family: Avenir;
+                font-weight: 900;
+            }            
             h4{
                 font-weight:700;
-                margin-top: -14%;
+                margin-top: -28%;
                 margin-bottom:14%;
                 margin-left:28%;
             }
@@ -132,24 +144,20 @@ export default {
         .agenda{
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-top: -2%;
             h6{
                 font-weight: 800;
             }
-        }
+        }       
         
-        .todayday{
-            h1{
-                font-size: 9em;
-                font-family: Avenir;
-                font-weight: 900;
-            }
-        }
     }
     .notas{
         color: grey;
         background-color: rgb(245, 239, 228);
         margin-top: 14%;
         padding: 7%;
+        border-radius: 6%;
         input{
             border: 0;
             border-bottom: solid 1px black;

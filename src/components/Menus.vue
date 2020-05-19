@@ -1,6 +1,5 @@
 <template>
-  <div class="menus">
-        <router-link>teste</router-link>
+  <div class="menus">       
         <router-link to="/" class="linkando">
           <img src="./../assets/stock.png" alt="estoque" />
         </router-link>
@@ -10,7 +9,7 @@
         <router-link to="/" class="linkando">
           <img src="./../assets/consultas.png" alt="estoque" />
         </router-link>
-        <router-link to="/" class="linkando">
+        <router-link to="/clientes" class="linkando">
           <img src="./../assets/cotacoes.png" alt="estoque" />
         </router-link>
         <router-link to="/cadastro" class="linkando">
@@ -30,14 +29,15 @@ export default {
 
 <style lang="scss" scoped>
   .menus {
-      width: 9%;
-      height: 75%;
+      width: 14%;
+      height: 95%;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-left: 10%;
       padding: 1%;
       background-color: #707070;
+      border-radius: 7%;
       .linkando {
         img {
           width: 98%;
