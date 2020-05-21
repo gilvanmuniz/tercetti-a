@@ -3,60 +3,75 @@
     <div class="formulario ml-4">
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group id="input-group-4">
-          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-            <b-form-checkbox value="me">Carro</b-form-checkbox>
-            <b-form-checkbox value="that">Moto</b-form-checkbox>
+          <b-form-checkbox-group class="text-left ml-3" v-model="form.checked" id="checkboxes-4">
+            <b-form-checkbox value="me"><h5>Carro</h5></b-form-checkbox>
+            <b-form-checkbox value="that"><h5>Moto</h5></b-form-checkbox>
           </b-form-checkbox-group>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-1"
-          label="Novo Carro:"
-          label-for="input-1"
-          description="Aqui só o nome básico do carro"
-        >
-          <!-- @submit="onSubmit" @reset="onReset" -->
-          <b-form-input
-            id="input-1"
-            v-model="form.car"
-            type="text"
-            required
-            placeholder="Nome do Carro"
-          ></b-form-input>
-        </b-form-group>
+        <!-- @submit="onSubmit" @reset="onReset" -->
+        <b-form-input
+          id="input-1"
+          v-model="form.car"
+          type="text"
+          required
+          placeholder="Modelo"
+          class="mb-2"
+        ></b-form-input>
 
-        <b-form-group id="input-group-2" label="Marca:" label-for="input-2">
-          <b-form-input id="input-2" v-model="form.marca" required placeholder="Marca"></b-form-input>
-        </b-form-group>
+        <b-form-input class="mb-2" id="input-2" v-model="form.marca" required placeholder="Marca"></b-form-input>
 
-        <b-form-group id="input-group-2" label="Ano:" label-for="input-2">
-          <b-form-input id="input-2" v-model="form.ano" required placeholder="Ano do Carro"></b-form-input>
-        </b-form-group>
+        <b-form-input
+          class="mb-2"
+          id="input-2"
+          v-model="form.ano"
+          required
+          placeholder="Ano do Carro"
+        ></b-form-input>
 
-        <b-form-group id="input-group-2" label="Cilindradas:" label-for="input-2">
-          <b-form-input id="input-2" v-model="form.ano" required placeholder="Ano do Carro"></b-form-input>
-        </b-form-group>
+        <b-form-input
+          class="mb-2"
+          id="input-2"
+          v-model="form.ano"
+          required
+          placeholder="Cilindradas"
+        ></b-form-input>
 
-        <b-form-group id="input-group-3" label="Cor:" label-for="input-3">
-          <b-form-select id="input-3" v-model="form.color" :options="colors" required></b-form-select>
-        </b-form-group>
-        <hr>
-        <b-form-group id="input-group-3" label="Cor:" label-for="input-3">
-          <b-form-select id="input-3" v-model="form.color" :options="colors" required></b-form-select>
-        </b-form-group>
-        <b-form-group id="input-group-3" label="Cor:" label-for="input-3">
-          <b-form-select id="input-3" v-model="form.color" :options="colors" required></b-form-select>
-        </b-form-group>
+        <b-form-input
+          class="mb-2"
+          id="input-2"
+          v-model="form.ano"
+          required
+          placeholder="Cor"
+        ></b-form-input>
 
-        <b-form-group id="input-group-4">
+        <hr />
+
+       <b-form-input
+          class="mb-2"
+          id="input-2"
+          v-model="form.ano"
+          required
+          placeholder="Placa"
+        ></b-form-input>
+
+       <b-form-input
+          class="mb-4"
+          id="input-2"
+          v-model="form.ano"
+          required
+          placeholder="Chassis"
+        ></b-form-input>
+
+        <b-form-group class="text-left ml-3" id="input-group-4">
           <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
             <b-form-checkbox value="me">Loja</b-form-checkbox>
             <b-form-checkbox value="that">Consignado</b-form-checkbox>
           </b-form-checkbox-group>
         </b-form-group>
 
-        <b-button type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
+        <b-button class="mr-2 mt-4" type="submit" variant="primary">Submit</b-button>
+        <b-button class="mt-4" type="reset" variant="danger">Reset</b-button>
       </b-form>
       <!-- <b-card class="mt-3" header="Form Data Result"> -->
       <!-- <pre class="m-0">{{ form }}</pre> -->
@@ -64,7 +79,7 @@
     </div>
     <!-- formulario end -->
     <!-- <b-button class="ml-5" type="button" @click="saveCarros" >Salvar</b-button> -->
-    <div class="listcar">
+    <!-- <div class="listcar">
       <h3>Carros:</h3>
       <ul v-for="(car, i) in carros " :key="i">
         <div class="texto">
@@ -74,8 +89,8 @@
         </div>
         <b-button @click="tiraCarro" class>Delete</b-button>
       </ul>
-    </div>
-    <div class="clientList" v-if="clienteFound">
+    </div> < listcar end-->
+    <!-- <div class="clientList" v-if="clienteFound">
       <h3 class="text-center">Clientes buscando: {{form.car}}</h3>
       <ul>
         <li
@@ -84,7 +99,7 @@
           :key="i" 
         >{{ cliente + ' ' + clientesFone[i] }}</li> 
       </ul>
-    </div>
+    </div> clientList end-->
   </div>
 </template>
 
@@ -158,14 +173,14 @@ export default {
       console.log("TESTE");
     },
 
-    tiraCarro(){
+    tiraCarro() {
       const tira = {
         carro: this.carro,
         marca: this.marca,
         ano: this.ano,
         cor: this.color
       };
-      this.$store.dispatch('tiraCarro', tira, this.i )
+      this.$store.dispatch("tiraCarro", tira, this.i);
     },
 
     saveCarros() {
@@ -207,16 +222,20 @@ export default {
 .cadastro-autos {
   max-width: 99%;
   max-height: 99%;
-  // height: 70%;
+  height: 100%;
   // width: 70%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  //  background-color: yellow;
+  justify-content: start;
+  //background-color: rgb(155, 155, 154);  
 
   .formulario {
     color: white;
-    width: 60%;
+    width: 80%;    
+    input{
+      margin-left:3%;
+    }
+       
   } /* formulario end */
   .listcar {
     width: 90%;

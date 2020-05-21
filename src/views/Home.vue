@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+     <BarraSuperiorSimples />
     <div class="container">
       <div class="calendar">
         <Calendar />
@@ -82,13 +83,16 @@
  
 
 <script>
-import Footer from "./../components/Footer";
+import BarraSuperiorSimples from "./../components/barras/BarraSuperiorSimples";
 import Calendar from "./../components/Calendar";
+import Footer from "./../components/Footer";
+
 export default {
   name: "Home",
   components: {
+    BarraSuperiorSimples,    
+    Calendar,    
     Footer,
-    Calendar
   }
 };
 </script>
@@ -96,6 +100,7 @@ export default {
 .home {
   color: white;
   max-height: 80%;
+ 
   .container {
     display: flex;
     justify-content: space-between;

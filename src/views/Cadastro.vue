@@ -1,24 +1,42 @@
 <template>
-  <div class="cadastro">
-    <div class="calendar ml-3 ">
-      <Calendar />
-    </div>
+<div>
+  <BarraSuperior />
+  <div class="cadastro mb-3">
+   
     <div class="cadastro-autos ml-3">
       <CadastroAutos />
-    </div>   
-     <Menus class="menus" />
+    </div>
+    <div class="opcionais">      
+      <Opcionais />
+    </div>
+    <div class="local">
+      <LocalEfinaceiro />
+    </div> 
+     <Menus class="menus" />     
+  </div> <!-- cadastro end -->
+  <div class="footer">
+       <Footer />
   </div>
+</div>
+ 
 </template>
 
 <script>
+import BarraSuperior from './../components/barras/BarraSuperior'
 import Menus from './../components/Menus'
-import CadastroAutos from './../components/CadastroAutos'
-import Calendar from './../components/Calendar'
+import CadastroAutos from './../components/cadastros/CadastroAutos'
+import Opcionais from './../components/Opcionais'
+import LocalEfinaceiro from './../components/cadastros/LocalEfinaceiro'
+import Footer from './../components/Footer'
+
 export default {
   components: {
+    BarraSuperior,
     Menus,
-    Calendar,
-    CadastroAutos
+    Opcionais,
+    CadastroAutos,
+    LocalEfinaceiro,
+    Footer
   },
   data() {
     return {
@@ -36,23 +54,43 @@ export default {
   box-sizing: border-box;
   width: 100%;
   padding: 2%;
+  margin-top: -1.5%;
+  margin-left: -3%;
   
-  .calendar{
-    width: 21%;
-    max-height: 20%;
-    margin-left: 7%;
-  }
+  
+  // .calendar{
+  //   width: 21%;
+  //   max-height: 20%;
+  //   margin-left: 7%;
+  // }
   .cadastro-autos{
-    width: 100%;
-    margin-left: -1%;
-    margin-top: -4%;   
+    width: 96%;
+    height:550px;
+    margin-left: 0%;
+    margin-top: -0%;
+    margin-right: 2%;
+    border-radius: 7%;   
+  }
+  .opcionais{
+    background-color: white;
+    color: black;
+    border-radius: 4%;
+    margin-right: 2%;
+  }
+  .local{
+  margin-top: 2.2%;
   }
   .menus{
-    width: 9%;
-    margin-right: 2.5%;
-    margin-top: -4%; 
+    width: 14%;
+    margin-right: 2%;
+    margin-top: -1%; 
   }
  
+}
+.footer{
+  margin-top: 0%;
+  padding:2%;
+  min-height:240px;
 }
 
 </style>

@@ -1,5 +1,6 @@
 <template>
  <div class="container">
+   <BarraSuperiorSimples />
    <div class="clientes">
     <div class="calendar">
       <Calendar />
@@ -24,12 +25,14 @@
 </template>
 
 <script>
+import BarraSuperiorSimples from "./../components/barras/BarraSuperiorSimples";
 import Menus from "./../components/Menus";
-import CadastroClientes from "./../components/CadastroClientes";
+import CadastroClientes from "./../components/cadastros/CadastroClientes";
 import Calendar from './../components/Calendar'
 import Footer from './../components/Footer'
 export default {
   components: {
+    BarraSuperiorSimples,
     Menus,
     CadastroClientes,
     Calendar,

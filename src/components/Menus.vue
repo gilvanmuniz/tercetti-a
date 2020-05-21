@@ -30,11 +30,11 @@ export default {
 <style lang="scss" scoped>
   .menus {
       width: 14%;
-      height: 95%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-left: 10%;
+      margin-left: 6%;
       padding: 1%;
       background-color: #707070;
       border-radius: 7%;
