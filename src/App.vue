@@ -8,6 +8,7 @@ export default {
   created() {
       this.$store.dispatch('initClientes')
       this.$store.dispatch('initCarros')
+      this.$store.dispatch('initOpcionais')
       // this.$store.dispatch.loadData()
   }
 }

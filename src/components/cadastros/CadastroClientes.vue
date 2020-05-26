@@ -17,27 +17,27 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="FONE:" label-for="input-2">
-          <b-form-input id="input-2" v-model="form.fone" required placeholder="Fone aqui"></b-form-input>
+        <b-form-group  label="FONE:" label-for="input-2">
+          <b-form-input  v-model="form.fone" required placeholder="Fone aqui"></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="CELULAR:" label-for="input-2">
-          <b-form-input id="input-2" v-model="form.cell" required placeholder="WhatsApp aqui"></b-form-input>
+        <b-form-group  label="CELULAR:" label-for="input-2">
+          <b-form-input  v-model="form.cell" required placeholder="WhatsApp aqui"></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="EMAIL:" label-for="input-2">
-          <b-form-input id="input-2" type="email" v-model="form.email" required placeholder="email aqui"></b-form-input>
+        <b-form-group label="EMAIL:" label-for="input-2">
+          <b-form-input  type="email" v-model="form.email" required placeholder="email aqui"></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="PREFÊNCIA DE CARRO:" label-for="input-2">
-          <b-form-input id="input-2" v-model="form.prefer" required placeholder="Uma carro que gosta"></b-form-input>
+        <b-form-group  label="PREFÊNCIA DE CARRO:" label-for="input-2">
+          <b-form-input  v-model="form.prefer" required placeholder="Uma carro que gosta"></b-form-input>
         </b-form-group>
         
-        <b-form-group id="input-group-4">
-          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-            <b-form-checkbox value="me">Poços</b-form-checkbox>
-            <b-form-checkbox value="that">Região</b-form-checkbox>
-          </b-form-checkbox-group>
+        <b-form-group >
+          <b-form-radio-group  >
+            <b-form-radio v-model="form.pocos" value="Pocos">Poços</b-form-radio>
+            <b-form-radio v-model="form.regiao" value="Regiao">Região</b-form-radio>
+          </b-form-radio-group>
         </b-form-group>
 
         <b-button type="submit"  variant="primary">Submit</b-button>
@@ -60,9 +60,10 @@ export default {
         fone: "",
         cell: "",
         email: "",
-        prefer: ""
-      },
-     
+        prefer: "",
+        pocos: false,
+        regiao: false
+      },     
       show: true,
   }
  },
@@ -76,7 +77,7 @@ export default {
       evt.preventDefault();
       //alert(JSON.stringify(this.form))
       this.addClientes()
-      alert("Pronto para acrescentar " + this.form.car);     
+      alert("Pronto para acrescentar " + this.form.nome);     
       
     },
     onReset(evt) {
@@ -87,6 +88,8 @@ export default {
       this.form.cell = "";
       this.form.email = "";
       this.form.prefer = "";
+      this.form.pocos = "";
+      this.form.regiao = "";
       
       // Trick to reset/clear native browser form validation state
       // this.show = false;
@@ -101,7 +104,11 @@ export default {
          clienteId: 2, 
          clienteName:this.form.nome, 
          clienteFone:this.form.fone,
-         preferencia:this.form.prefer
+         clienteCell:this.form.cell,
+         clienteEmail:this.form.email,
+         preferencia:this.form.prefer,
+         pocos:this.form.pocos,
+         regiao:this.form.regiao,
        }
        this.$store.dispatch('addClientes', add)
        console.log("TESTE")

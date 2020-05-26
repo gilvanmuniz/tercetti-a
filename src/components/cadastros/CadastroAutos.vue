@@ -2,45 +2,45 @@
   <div class="cadastro-autos ml-4">
     <div class="formulario ml-4">
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <b-form-group id="input-group-4">
-          <b-form-checkbox-group class="text-left ml-3" v-model="form.checked" id="checkboxes-4">
-            <b-form-checkbox value="me"><h5>Carro</h5></b-form-checkbox>
-            <b-form-checkbox value="that"><h5>Moto</h5></b-form-checkbox>
-          </b-form-checkbox-group>
+        <b-form-group >
+          <b-form-radio-group class="text-left ml-3" id="checkboxes-4">
+            <b-form-radio value="true" v-model="form.carro" ><h5>Carro</h5></b-form-radio>
+            <b-form-radio value="true" v-model="form.moto" ><h5>Moto</h5></b-form-radio>
+          </b-form-radio-group>
         </b-form-group>
 
         <!-- @submit="onSubmit" @reset="onReset" -->
-        <b-form-input
-          id="input-1"
-          v-model="form.car"
+        <b-form-input          
+          v-model="form.modelo"
           type="text"
           required
           placeholder="Modelo"
           class="mb-2"
         ></b-form-input>
 
-        <b-form-input class="mb-2" id="input-2" v-model="form.marca" required placeholder="Marca"></b-form-input>
+        <b-form-input class="mb-2"  
+        v-model="form.marca" 
+        required 
+        placeholder="Marca">
+        </b-form-input>
 
         <b-form-input
-          class="mb-2"
-          id="input-2"
+          class="mb-2"          
           v-model="form.ano"
           required
           placeholder="Ano do Carro"
         ></b-form-input>
 
         <b-form-input
-          class="mb-2"
-          id="input-2"
-          v-model="form.ano"
+          class="mb-2"          
+          v-model="form.cilindradas"
           required
           placeholder="Cilindradas"
         ></b-form-input>
 
         <b-form-input
-          class="mb-2"
-          id="input-2"
-          v-model="form.ano"
+          class="mb-2"          
+          v-model="form.cor"
           required
           placeholder="Cor"
         ></b-form-input>
@@ -48,37 +48,34 @@
         <hr />
 
        <b-form-input
-          class="mb-2"
-          id="input-2"
-          v-model="form.ano"
+          class="mb-2"         
+          v-model="form.placa"
           required
           placeholder="Placa"
         ></b-form-input>
 
        <b-form-input
-          class="mb-4"
-          id="input-2"
-          v-model="form.ano"
+          class="mb-4"          
+          v-model="form.chassis"
           required
           placeholder="Chassis"
         ></b-form-input>
 
-        <b-form-group class="text-left ml-3" id="input-group-4">
-          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-            <b-form-checkbox value="me">Loja</b-form-checkbox>
-            <b-form-checkbox value="that">Consignado</b-form-checkbox>
-          </b-form-checkbox-group>
+        <b-form-group class="text-left ml-3" >
+          <!-- <b-form-radio-group >
+            <b-form-radio value="true" v-model="form.loja">Loja</b-form-radio>
+            <b-form-radio value="true" v-model="form.consignado">Consignado</b-form-radio>
+          </b-form-radio-group> -->
         </b-form-group>
-
-        <b-button class="mr-2 mt-4" type="submit" variant="primary">Submit</b-button>
-        <b-button class="mt-4" type="reset" variant="danger">Reset</b-button>
-      </b-form>
+          <b-button class="mr-2 mt-4"  type="submit" variant="primary">Submit</b-button>
+          <b-button class="mt-4" type="reset" variant="danger">Reset</b-button>
+        </b-form>
       <!-- <b-card class="mt-3" header="Form Data Result"> -->
       <!-- <pre class="m-0">{{ form }}</pre> -->
       <!-- </b-card> -->
     </div>
     <!-- formulario end -->
-    <!-- <b-button class="ml-5" type="button" @click="saveCarros" >Salvar</b-button> -->
+    <!-- <b-button class="ml-5" type="button" @click="listCarros" >Salvar</b-button> -->
     <!-- <div class="listcar">
       <h3>Carros:</h3>
       <ul v-for="(car, i) in carros " :key="i">
@@ -90,8 +87,8 @@
         <b-button @click="tiraCarro" class>Delete</b-button>
       </ul>
     </div> < listcar end-->
-    <!-- <div class="clientList" v-if="clienteFound">
-      <h3 class="text-center">Clientes buscando: {{form.car}}</h3>
+    <div class="clientList" v-if="clienteFound">
+      <h3 class="text-center">Clientes buscando: {{form.modelo}}</h3>
       <ul>
         <li
           class="mr-7"
@@ -99,7 +96,7 @@
           :key="i" 
         >{{ cliente + ' ' + clientesFone[i] }}</li> 
       </ul>
-    </div> clientList end-->
+    </div> 
   </div>
 </template>
 
@@ -108,20 +105,19 @@ export default {
   data() {
     return {
       form: {
-        car: "",
+        carro:false,
+        moto: false,
+        modelo: "",
         marca: "",
-        color: null,
         ano: "",
-        checked: []
+        cilindradas: "",
+        cor: "",
+        placa: "",
+        chassis: "",
+        // loja:false,
+        // consignado:false,        
       },
-      colors: [
-        { text: "Select One", value: null },
-        "Branco",
-        "Preto",
-        "Prata",
-        "Vermelho",
-        "Marinho"
-      ],
+      
       show: true,
 
       clientList: [],
@@ -145,45 +141,58 @@ export default {
       //alert(JSON.stringify(this.form))
       alert("Pronto para acrescentar " + this.form.car);
       this.addCarros();
-      this.buscaClientes(this.form.car);
+      this.buscaClientes(this.form.modelo);
     },
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.car = "";
+      this.form.modelo = "";
       this.form.marca = "";
       this.form.ano = null;
-      this.form.color = [];
+      this.form.cilindradas = "";
+      this.form.cor = [];
+      this.form.placa = "";
+      this.form.chassis = "";      
       this.clienteFound = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
-        this.show = true;
+      this.show = true;
       });
     }, // onReset end
 
     addCarros() {
       const addc = {
-        carro: this.form.car,
-        marca: this.form.marca,
         ano: this.form.ano,
-        cor: this.form.color
+        carro:this.form.carro,        
+        chassis: this.form.chassis,
+        cilindradas: this.form.cilindradas,
+        // consignado: this.form.consignado,
+        cor: this.form.cor,
+        // loja: this.form.loja,
+        moto:this.form.moto,
+        modelo: this.form.modelo,
+        marca: this.form.marca,
+        placa: this.form.placa,
       };
       this.$store.dispatch("addCarros", addc);
-      console.log("TESTE");
+      //console.log(addc.modelo);
     },
 
     tiraCarro() {
       const tira = {
-        carro: this.carro,
-        marca: this.marca,
-        ano: this.ano,
-        cor: this.color
+        modelo: this.form.modelo,
+        marca: this.form.marca,
+        ano: this.form.ano,
+        cor: this.form.cor,
+        placa: this.form.placa,
+        chassis: this.form.chassis,
+        loja: this.form.loja,
       };
       this.$store.dispatch("tiraCarro", tira, this.i);
     },
 
-    saveCarros() {
+    listCarros() {
       // const addc  = this.$store.getters.carros;
       // this.$http.put('data.json', addc)
       this.$http.get("data.json").then(resp => {
@@ -192,29 +201,46 @@ export default {
       });
     },
 
-    buscaClientes(car) {
-      this.clientList = [];
-      this.clientesFone = [];
-      this.clientes.forEach(element => {
-        for (var [key, value] of Object.entries(element)) {
-          if (value == car) {
-            console.log(key + " " + value);
-            for (var [key1, value1] of Object.entries(element)) {
-              if (key1 == "clienteName") {
-                console.log(key1 + " " + value1);
-                this.clientList.push(value1);
-                this.clienteFound = true;
-              }
-              if (key1 == "clienteFone") {
-                this.clientesFone.push(value1);
-                console.log(key1);
-              }
-            }
-          } /* if end */
-        }
-      });
+    // buscaClientes(car) {
+    //   this.clientList = [];
+    //   this.clientesFone = [];
+    //   this.clientes.forEach(element => {
+    //     for (var [key, value] of Object.entries(element)) {
+    //       if (value == car) {
+    //         console.log(key + " " + value);
+    //         for (var [key1, value1] of Object.entries(element)) {
+    //           if (key1 == "clienteName") {
+    //             console.log(key1 + " " + value1);
+    //             this.clientList.push(value1);
+    //             this.clienteFound = true;
+    //           }
+    //           if (key1 == "clienteFone") {
+    //             this.clientesFone.push(value1);
+    //             console.log(key1);
+    //           }
+    //         }
+    //       } /* if end */
+    //     }
+    //   });
+    // }
+
+    buscaClientes(car){
+      for (var [key, value] of Object.entries(this.clientes)) {      
+             key
+         for (var [key1, value1] of Object.entries(value)){
+             key1 //console.log(car)          
+           if(value1.key1 == car){             
+             for (var [key2, value2] of Object.entries(value1)){
+                key2
+                console.log(value2.key2)
+             }
+               
+           }
+         }
+      }
     }
-  }
+
+  }  /* methosds end */
 };
 </script>
 
@@ -225,6 +251,7 @@ export default {
   height: 100%;
   // width: 70%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: start;
   //background-color: rgb(155, 155, 154);  

@@ -3,24 +3,31 @@
     <div class="local-financeiro">
       <div class="local-e-financeiro mb-3">
            <h4>Local:</h4>
-           <b-form-checkbox class="mb-1" size="lg">Show Room</b-form-checkbox>
-           <b-form-checkbox class="mb-1" size="lg">Site</b-form-checkbox>
+           <!-- <b-form-radio-group >
+            <b-form-radio value="Show Room" v-model="form.showRoom">Show Room</b-form-radio>
+            <b-form-radio value="Site" v-model="form.site">Site</b-form-radio>
+          </b-form-radio-group> -->
+            <b-form-radio-group>
+                 <b-form-radio v-model="site" value="Site" class="mb-1" size="lg">Site</b-form-radio>
+                 <b-form-radio v-model="showRoom" value="Show Room" class="mb-1" size="lg">Show Room</b-form-radio>
+            </b-form-radio-group>
+          
       </div>
       <div class="local-e-financeiro">
           <h4>FINACEIRO:</h4>
-          <b-form-checkbox class="mb-1" size="lg">Própio</b-form-checkbox>
-          <b-form-checkbox class="mb-1" size="lg">Consignado</b-form-checkbox>
-         <b-form-input class="mb-1" placeholder="Valor da Compra"></b-form-input>
-         <b-form-input class="mb-1" placeholder="Valor de Lucro"></b-form-input>
-         <b-form-input class="mb-1" placeholder="Valor de Tabela"></b-form-input>
-         <b-form-input class="mb-1" placeholder="Investimentos"></b-form-input>
+          <b-form-checkbox v-model="proprio" value="propio" class="mb-1" size="lg">Própio</b-form-checkbox>
+          <b-form-checkbox v-model="consignado" value="consignado" class="mb-1" size="lg">Consignado</b-form-checkbox>
+         <b-form-input v-model="valorCompra" class="mb-1" placeholder="Valor da Compra"></b-form-input>
+         <b-form-input v-model="valorLucro" class="mb-1" placeholder="Valor de Lucro"></b-form-input>
+         <b-form-input v-model="valorTabela" class="mb-1" placeholder="Valor de Tabela"></b-form-input>
+         <b-form-input v-model="Investimentos" class="mb-1" placeholder="Investimentos"></b-form-input>
          <hr>
-         <b-form-input class="mb-1" placeholder="Valor de Venda"></b-form-input>
+         <b-form-input v-model="valorVenda" class="mb-1" placeholder="Valor de Venda"></b-form-input>
       </div>
             
   </div> <!-- local-financeiro end -->
     <div class="savar mt-2 text-right">
-          <b-button >Salvar</b-button>
+          <b-button @click="salveLocalFinanceiro" >Salvar</b-button>
     </div>
  </div> <!-- mestra end -->
 
@@ -28,7 +35,46 @@
 
 <script>
 export default {
-
+ data(){
+     return {
+         local:'',
+         showRoom: false,
+         site: false,
+         proprio: false,
+         consignado:false,
+         valorCompra:'',
+         valorLucro:'',
+         valorTabela:'',
+         Investimentos:'',
+         valorVenda:'',             
+         
+         localFinanceiro: []
+     }
+ },
+ methods: {
+     salveLocalFinanceiro(){
+          if(this.showRoom){
+                 this.local = this.showRoom
+             }
+             else if(this.sit){
+                this.local = this.site
+             }
+         const LocalFinanceiro ={
+             local:this.local,            
+             proprio: this.proprio,
+             consignado: this.consignado,
+             valorCompra: this.valorCompra, 
+             valorLucro: this.valorLucro, 
+             valorTabela: this.valorTabela,
+             Investimentos: this.Investimentos,
+             valorVenda: this.valorVenda,
+       };
+    //    console.log(this.localFinanceiro)
+       
+        //this.$store.dispatch("addLocalFinanceiro", LocalFinanceiro);
+        console.log(LocalFinanceiro)
+     }// salveLocalFinanceiro end
+ }
 }
 </script>
 

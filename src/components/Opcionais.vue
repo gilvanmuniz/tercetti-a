@@ -1,28 +1,50 @@
 <template>
 <div class="mestra">
  <div class="opcionais">    
-  
-    <!-- <b-form-group label="Opcionais e Características">
-      <b-form-checkbox
-        v-for="option in options"
-        v-model="selected"
-        :key="option.value"
-        :value="option.value"
-        name="flavour-3a"
-      >
-        <div class="label">{{ option.text }}</div>
-      </b-form-checkbox>
-    </b-form-group> -->
+    
     <h4 class="mb-3"><b>Opcionais:</b></h4>
-    <div class="checa" v-for="(option, i) in options" :key="i">
-        <b-form-checkbox  v-model="checked"  name="check-button" switch class="text-left">
-          <h4>{{ option.text}} </h4>
+    <div class="checa" >
+        <b-form-checkbox  v-model="arCondicionado" value=true  name="check-button" switch class="text-left">
+          <h4>Ar Condicionado</h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="retrovisor" value=true  name="check-button" switch class="text-left">
+          <h4>Retrovisor elétrico </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="rodas" value=true  name="check-button" switch class="text-left">
+          <h4>Roda de Liga Leve </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="cambio" value=true  name="check-button" switch class="text-left">
+          <h4>Câmbio Automático </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="farois" value=true  name="check-button" switch class="text-left">
+          <h4>Faróis de Milha </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="vidros" value=true  name="check-button" switch class="text-left">
+          <h4>Vidros Elétrico </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="travas" value=true  name="check-button" switch class="text-left">
+          <h4>Travas e Alarmes </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="limpador" value=true  name="check-button" switch class="text-left">
+          <h4>Limpador Trazeiro </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="desembassador" value=true  name="check-button" switch class="text-left">
+          <h4>Desembassador Trazeiro</h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="teto" value=true  name="check-button" switch class="text-left">
+          <h4>Teto Solar </h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="flex" value=true  name="check-button" switch class="text-left">
+          <h4>Flex</h4>
+        </b-form-checkbox>
+        <b-form-checkbox  v-model="gnv" value=true  name="check-button" switch class="text-left">
+          <h4>Com GNV </h4>
         </b-form-checkbox>
    </div> 
           
 </div><!-- optionais end -->
      <div class="savar mt-2 text-right">
-          <b-button >Salvar</b-button>
+          <b-button @click="salvaOpcionais">Salvar</b-button>
     </div>
 </div>
   
@@ -32,23 +54,42 @@
 export default {
   data() {
       return {
-        selected: [], // Must be an array reference!
-        options: [
-          { text: 'Ar Condicionado', value: 'orange' },
-          { text: 'Retrovisor elétrico', value: 'apple' },
-          { text: 'Rodas de Liga Leve', value: 'pineapple' },
-          { text: 'Câmbio Automático', value: 'pineapple' },
-          { text: 'Faróis de Milha', value: 'pineapple' },
-          { text: 'Vidros Elétricos', value: 'pineapple' },
-          { text: 'Travas e Alarme', value: 'pineapple' },
-          { text: 'Limpador Trazeiro', value: 'pineapple' },
-          { text: 'Desembassador Trazeiro', value: 'pineapple' },
-          { text: 'Teto Solar', value: 'pineapple' },
-          { text: 'Flex', value: 'pineapple' },
-          { text: 'Com GNV', value: 'grape' }
-        ]
+        arCondicionado: '',
+        retrovisor:'',
+        rodas:'',
+        cambio:'',
+        farois:'',
+        vidros:'',
+        travas:'',
+        limpador:'',
+        desembassador:'',
+        teto:'',
+        flex:'',
+        gnv:'',
+        selected: [], // Must be an array reference!        
       }
-    }
+    },
+  methods: {
+      salvaOpcionais(){
+         //this.selected.push(this.options.value)
+         const opcionais = {
+           arCondicionado: this.arCondicionado,
+           cambio: this.cambio,
+           desembassador: this.desembassador,
+           farois: this.farois,
+           flex: this.flex,
+           gnv: this.gnv,
+           limpador: this.limpador,
+           retrovisor: this.retrovisor,
+           rodas: this.rodas,
+           teto: this.teto,
+           travas: this.travas,
+           vidros: this.vidros,
+         }
+         this.$store.dispatch("addOpcionais", opcionais);
+         console.log(opcionais)
+      }
+  }
   
 }
 </script>
