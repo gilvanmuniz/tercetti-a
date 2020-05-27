@@ -11,7 +11,8 @@ export default new Vuex.Store({
     clientes:[],    
     carros:[],
     localFinanceiro: [],
-    opcionais:[]   
+    opcionais:[],
+    temperariaId:0   
   },
   
   mutations: {    
@@ -37,7 +38,7 @@ export default new Vuex.Store({
     },
 
     setCarros(state, carros){       
-      state.carros = carros;
+      state.carros = carros;      
     },
 
     // addCarros(state, {carro, moto, modelo, marca, ano, cilindradas, cor, placa, chassis, loja, consignado}
@@ -67,10 +68,23 @@ export default new Vuex.Store({
     addLocalFinanceiro(state, payload){
       state.localFinanceiro = payload;
     },
+    setTemperariaId(state, temperariaId){ 
+      temperariaId = [];      
+      state.carros = temperariaId;      
+    },
 
-    }, //mutations end        
-           
- 
+    addTemperariaId(state, id){
+      state.temperariaId = id;
+    },
+
+    deleteTemperariaId(state){
+      state.temperariaId = 0;
+    }
+
+  }, //mutations end        
+    
+    
+    
 
   actions: {
     addClientes({ commit }, add ){      
@@ -93,10 +107,9 @@ export default new Vuex.Store({
     addCarros({ commit }, addc ){
       Vue.prototype.$http.post('/carros', addc).then(resp =>{
         var resposta = resp.data 
-        console.log(resposta)     
-        commit('addCarros', addc )
-      });   
-      
+        console.log(resposta.id);          
+        commit('addCarros', addc );               
+      });                 
     },   
      
     tiraCarro( { commit }, tira ){
@@ -137,14 +150,31 @@ export default new Vuex.Store({
       
    },
 
-   addLocalFinanceiro({ commit }, add ){
-    Vue.prototype.$http.post('data.json', add).then(resp =>{
+   initTemperariaId({ commit }){          
+      commit('setTemperariaId' )     
+   },
+
+   addLocalFinanceiro({ commit }, add  ){ 
+    Vue.prototype.$http.get('/carros').then(resp =>{
+      var resultado = resp.data
+      var id = resultado[(resultado.length - 1)].id      
+    Vue.prototype.$http.put('/carros/'+ id , add).then(resp =>{
       var resposta = resp.data 
       console.log(resposta)     
       commit('addLocalFinanceiro', add)
+      console.log(id)
     });
-    
+   });
    },
+
+     addTemperariaId({ commit }, id){
+      //id = this.state.temperariaId + 1;
+      commit('addTemperariaId', id)
+    },
+
+    deleteTemperariaId({ commit }){
+      commit('deleteTemperariaId')
+    }
    
 
     // loadData({ commit }) {
@@ -174,8 +204,12 @@ export default new Vuex.Store({
     },
     opcionais(state){
       return state.opcionais
-    } 
+    },
     
+    temperariaId(state){
+      return state.temperariaId
+    } 
+
   },
 
   modules: {

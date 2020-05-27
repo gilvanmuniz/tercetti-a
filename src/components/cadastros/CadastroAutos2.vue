@@ -4,8 +4,8 @@
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group >
           <b-form-radio-group class="text-left ml-3" id="checkboxes-4">
-            <b-form-radio value="true" v-model="carro" ><h5>Carro</h5></b-form-radio>
-            <b-form-radio value="true" v-model="moto" ><h5>Moto</h5></b-form-radio>
+            <b-form-radio value="true" v-model="form.carro" ><h5>Carro</h5></b-form-radio>
+            <b-form-radio value="true" v-model="form.moto" ><h5>Moto</h5></b-form-radio>
           </b-form-radio-group>
         </b-form-group>
 
@@ -26,21 +26,21 @@
 
         <b-form-input
           class="mb-2"          
-          v-model="ano"
+          v-model="form.ano"
           required
           placeholder="Ano do Carro"
         ></b-form-input>
 
         <b-form-input
           class="mb-2"          
-          v-model="cilindradas"
+          v-model="form.cilindradas"
           required
           placeholder="Cilindradas"
         ></b-form-input>
 
         <b-form-input
           class="mb-2"          
-          v-model="cor"
+          v-model="form.cor"
           required
           placeholder="Cor"
         ></b-form-input>
@@ -49,14 +49,14 @@
 
        <b-form-input
           class="mb-2"         
-          v-model="placa"
+          v-model="form.placa"
           required
           placeholder="Placa"
         ></b-form-input>
 
        <b-form-input
           class="mb-4"          
-          v-model="chassis"
+          v-model="form.chassis"
           required
           placeholder="Chassis"
         ></b-form-input>
@@ -96,29 +96,30 @@
           :key="i" 
         >{{ cliente + ' ' + clientesFone[i] }}</li> 
       </ul>
-    </div>
-     
+    </div> 
   </div>
 </template>
 
 <script>
-
 export default {
-  props:[ 'form'],
+  props: [ 'modelo' , 'marca' ],
+          
+      
+
   data() {
     return {
-      
+      form: {
         carro:false,
-        moto: false,
-        modelo: "",
-        marca: "",
+        moto: false,      
         ano: "",
         cilindradas: "",
         cor: "",
         placa: "",
         chassis: "",
         // loja:false,
-        // consignado:false,   
+        // consignado:false,        
+      },
+      
       show: true,
       clientList: [],
       clientesFone: [],
@@ -140,18 +141,18 @@ export default {
       //alert(JSON.stringify(this.form))
       alert("Pronto para acrescentar " + this.form.car);
       this.addCarros();
-      //this.buscaClientes(this.form.modelo);
+      this.buscaClientes(this.form.modelo);
     },
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      // this.form.modelo = "";
-      // this.form.marca = "";
-      // this.form.ano = null;
-      // this.form.cilindradas = "";
-      // this.form.cor = [];
-      // this.form.placa = "";
-      // this.form.chassis = "";      
+      this.form.modelo = "";
+      this.form.marca = "";
+      this.form.ano = null;
+      this.form.cilindradas = "";
+      this.form.cor = [];
+      this.form.placa = "";
+      this.form.chassis = "";      
       this.clienteFound = null;
       // Trick to reset/clear native browser form validation state
       this.show = false;
@@ -161,39 +162,25 @@ export default {
     }, // onReset end
 
     addCarros() {
-      this.form = {
-        ano: this.ano,
-        carro:this.carro,        
-        chassis: this.chassis,
-        cilindradas: this.cilindradas,
+      const addc = {
+        ano: this.form.ano,
+        carro:this.form.carro,        
+        chassis: this.form.chassis,
+        cilindradas: this.form.cilindradas,
         // consignado: this.form.consignado,
-        cor: this.cor,
+        cor: this.form.cor,
         // loja: this.form.loja,
-        moto:this.moto,
-        modelo: this.modelo,
-        marca: this.marca,
-        placa: this.placa,
+        moto:this.form.moto,
+        modelo: this.form.modelo,
+        marca: this.form.marca,
+        placa: this.form.placa,
       };
-      //  this.form = this.modelo
-        
-       this.$emit('dados', this.form )
-      //this.$store.dispatch("addCarros", addc);
+      this.$store.dispatch("addCarros", addc);
       
       //console.log(addc.modelo);
     },
 
-    tiraCarro() {
-      const tira = {
-        modelo: this.form.modelo,
-        marca: this.form.marca,
-        ano: this.form.ano,
-        cor: this.form.cor,
-        placa: this.form.placa,
-        chassis: this.form.chassis,
-        loja: this.form.loja,
-      };
-      this.$store.dispatch("tiraCarro", tira, this.i);
-    },
+  
 
     listCarros() {
       // const addc  = this.$store.getters.carros;
@@ -204,44 +191,8 @@ export default {
       });
     },
 
-    // buscaClientes(car) {
-    //   this.clientList = [];
-    //   this.clientesFone = [];
-    //   this.clientes.forEach(element => {
-    //     for (var [key, value] of Object.entries(element)) {
-    //       if (value == car) {
-    //         console.log(key + " " + value);
-    //         for (var [key1, value1] of Object.entries(element)) {
-    //           if (key1 == "clienteName") {
-    //             console.log(key1 + " " + value1);
-    //             this.clientList.push(value1);
-    //             this.clienteFound = true;
-    //           }
-    //           if (key1 == "clienteFone") {
-    //             this.clientesFone.push(value1);
-    //             console.log(key1);
-    //           }
-    //         }
-    //       } /* if end */
-    //     }
-    //   });
-    // }
 
-    buscaClientes(car){
-      for (var [key, value] of Object.entries(this.clientes)) {      
-             key
-         for (var [key1, value1] of Object.entries(value)){
-             key1 //console.log(car)          
-           if(value1.key1 == car){             
-             for (var [key2, value2] of Object.entries(value1)){
-                key2
-                console.log(value2.key2)
-             }
-               
-           }
-         }
-      }
-    }
+   
 
   }  /* methosds end */
 };
@@ -258,9 +209,7 @@ export default {
   align-items: center;
   justify-content: start;
   //background-color: rgb(155, 155, 154);  
-  .envia{
-    display:none;
-  }
+
   .formulario {
     color: white;
     width: 80%;    

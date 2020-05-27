@@ -35,6 +35,7 @@
 
 <script>
 export default {
+ 
  data(){
      return {
          local:'',
@@ -49,6 +50,11 @@ export default {
          valorVenda:'',             
          
          localFinanceiro: []
+     }
+ },
+ computed: {
+     id(){
+         return this.$store.getters.temperariaId
      }
  },
  methods: {
@@ -71,8 +77,8 @@ export default {
        };
     //    console.log(this.localFinanceiro)
        
-        //this.$store.dispatch("addLocalFinanceiro", LocalFinanceiro);
-        console.log(LocalFinanceiro)
+        this.$store.dispatch("addLocalFinanceiro", LocalFinanceiro);
+        
      }// salveLocalFinanceiro end
  }
 }

@@ -4,8 +4,13 @@
   <div class="cadastro mb-3">
    
     <div class="cadastro-autos ml-3">
-      <CadastroAutos />
+      <CadastroAutos 
+      :form="form"
+      @dados="form = $event"  /> <!--  end -->    
+      <b-button @click="addCarros">Cadastro</b-button>
+      <!-- {{ form }} -->
     </div>
+
     <div class="opcionais">      
       <Opcionais />
     </div>
@@ -34,13 +39,21 @@ export default {
     BarraSuperior,
     Menus,
     Opcionais,
-    CadastroAutos,
+    CadastroAutos,    
     LocalEfinaceiro,
     Footer
   },
   data() {
     return {
-     
+        form:''
+    }
+  }, 
+ computed: {
+    
+ },
+  methods:{
+    addCarros(){
+      console.log(this.form.marca + ' - ' + this.form.modelo)
     }
   }
 }

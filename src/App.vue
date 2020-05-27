@@ -9,7 +9,7 @@ export default {
       this.$store.dispatch('initClientes')
       this.$store.dispatch('initCarros')
       this.$store.dispatch('initOpcionais')
-      // this.$store.dispatch.loadData()
+      this.$store.dispatch('initTemperariaId')
   }
 }
 </script>
